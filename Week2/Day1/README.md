@@ -8,26 +8,27 @@ So first I took out a paper and a pen and thought of a sort of "crap" website wi
 
 ![plot](./assets/web_plot.jpg)
 
+
 Now that I had the idea I did a quick design.
 
 ![plot](./assets/web_design.jpg)
+
 
 Then I did it on figma to have a better idea of the proportions and interactions, I also did the drawings on gimp.
 
 ![figma](./assets/figma.png)
 
+
 Now, all that was left was to do the coding.
 
 ![website](./assets/WebVid.gif)
 
-The website was now functional I wanted to accentuate the "uselessness" of my "connected object -ish" as well as to give the client even more the need to press the button so I did a quick design on paper
-
+The website was now functional but I wanted to accentuate the "uselessness" of my "connected object -ish" as well as to give the client even more the need to press the button so I did a quick design on paper
 
 ![buttonpaper](./assets/button_schem1.jpg)
 
-and then on fusion 360 with enough space to place the esp32, the button at the bottom to be pressed and holes for the cable and here it was ***The Holy Button.
+and then on fusion 360 with enough space to place the esp32, the button at the bottom to be pressed and holes for the cable and here it was ~ ***The Holy Button*** ~.
 
-
-![3Dbutton](./assets/Buttonanim.gif
+![3Dbutton](./assets/Buttonanim.gif)
 
 
