@@ -1,0 +1,32 @@
+body {
+  background-color: #D81212;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #FFFFFF;
+  margin-top: 15vh;
+  text-align:center;
+}
+
+img {
+  max-width: 50vh;
+  height: auto;
+  z-index: 6;
+}
+.img_container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0; /* Start at the top of the viewport */
+  left: 0; /* Start at the left of the viewport */
+  display: flex; /* Flexbox to center the image */
+  justify-content: center; /* Center horizontally */
+  align-items: center;
+  z-index: 5;
+  background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 35vh 35vw);
+}
+
+

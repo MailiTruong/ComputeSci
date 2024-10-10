@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>newPage</title>
+    <script>
+      function getQueryParam(param) {
+        const urlParams= new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      window.onload = function() {
+        const message = getQueryParam('message');
+        enableText(message);
+      }
+
+      function enableText(message)
+      {
+        if (message == '1')
+        {
+          document.getElementById('dynamic-text').textContent = "Just don't click";
+        }
+        if (message == '2')
+        {
+          document.getElementById('dynamic-text').textContent = "JUST DON'T CLICK!";
+        }
+
+        if (message == '3')
+        {
+          document.getElementById('dynamic-text').textContent = "JUST DON'T CLICK!!";
+        }
+        if (message == '4')
+        {
+
+          let paragraph = document.getElementById("dynamic-text");
+          const intervalId = setInterval(function() {
+            paragraph.innerHTML += "<br>JUST DON'T CLICK"; 
+          }, 25); 
+          setTimeout(function() {
+            clearInterval(intervalId);
+          }, 1000);
+        }
+      }
+        setTimeout(function() {
+          window.location.href = 'index.html'
+        },1000)
+    </script>
+  </head>
+  <body>
+    <div>
+      <p id="dynamic-text"></p>
+    </div>
+  </body>
+</html>
+

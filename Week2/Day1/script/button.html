@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>you clicked</title>  
+    <link href="stylebutton.css" rel="stylesheet"/>
+  </head>  
+  <body>
+    <div>
+      <h1 id="dynamic-txt"></h1>
+    </div>
+    <div class="img_container" style="position: relative;">
+      <img id="dynamic-img"> 
+    </div>
+    <script>
+      function getQueryParam(param) {
+        const urlParams= new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      window.onload = function() {
+        const message = getQueryParam('message');
+        enableText(message);
+      }
+
+      function enableText(message)
+      {
+        if (message == '1')
+        {
+          document.getElementById('dynamic-txt').textContent = "YOU CLICKED";
+          document.getElementById('dynamic-img').src = 'scream.png';
+        }
+        if (message == '2')
+        {
+          document.getElementById('dynamic-txt').textContent = "YOU CLICKED AGAIN";         
+          document.getElementById('dynamic-img').src = 'agace.png';
+        }
+
+        if (message == '3')
+        {
+          document.getElementById('dynamic-txt').textContent = "YOU CLICKED AGAIN!!";
+          document.getElementById('dynamic-img').src = 'death.png';
+        }
+        if (message == '4')
+        {
+
+          document.getElementById('dynamic-txt').textContent = "AGAIN???????";
+          document.getElementById('dynamic-img').src = 'angry.png';
+        }
+      }
+      setTimeout(function() {
+        window.location.href = 'index.html'
+      },1000)
+    </script>
+  </body>
+</html>
+
