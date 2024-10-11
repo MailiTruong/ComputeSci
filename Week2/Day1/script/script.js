@@ -4,7 +4,7 @@
 
 */
 
-const socket = new WebSocket('ws://192.168.1.38/'); // Change this to your ESP32 IP  
+const socket = new WebSocket('ws://10.1.224.63/'); // Change this to your ESP32 IP  
 
 socket.onopen = function() {  
   console.log('WebSocket connection opened');  

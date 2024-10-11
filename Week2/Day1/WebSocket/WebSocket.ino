@@ -3,8 +3,8 @@
 
 #define BUTTON_PIN 23
 
-const char* ssid = "SFR_8450"; // Replace with your network SSID  
-const char* password = "uhq55dykr8fni27ucvb4"; // Replace with your network password  
+const char* ssid = "PoleDeVinci_IFT"; // Replace with your network SSID  
+const char* password = "*c.r4UV@VfPn_0"; // Replace with your network password  
 bool lastButtonState = HIGH;
 
 WebSocketsServer webSocket = WebSocketsServer(80); // Port 81  
