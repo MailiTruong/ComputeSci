@@ -1,14 +1,56 @@
 import pygame
 
-class Menu:
+class Menu():
     def __init__(self):
+        super().__init__()
+        self.input_active = False
+        self.player_name = ''
+        self.cursor_timer = 0
+        self.cursor_visible = True
+        self.input_box = pygame.Rect(200, 250, 400, 50)
         self.font = pygame.font.SysFont("monospace", 16)
-        self.input =""
-        self.screen = pygame.display.get_surface()
 
-    def display(self):
-        text_surface = self.font.render("Press enter to start", 1, (0, 0, 0))
-        text_rect = text_surface.get_rect(center=(self.screen.get_width() // 2, self.screen.get_height() // 2))
-        self.screen.blit(text_surface, text_rect)
+    def event_handler(self, event):
+      
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.input_box.collidepoint(event.pos):
+                self.input_active = not self.input_active
+            else:
+                self.input_active = False
 
+        if event.type == pygame.KEYDOWN:
+            if self.input_active:
+                if event.key == pygame.K_BACKSPACE:
+                    self.player_name = self.player_name[:-1]
+                else:
+                    self.player_name += event.unicode 
 
+    def update(self):
+        # Cursor blinking logic
+        self.cursor_timer += pygame.time.Clock().get_time()
+        if self.cursor_timer >= 500:
+            self.cursor_visible = not self.cursor_visible
+            self.cursor_timer = 0
+
+    def display(self, screen):
+        screen.fill([255, 255, 255])
+
+        text_surface = self.font.render("Press enter to start", True, (0, 0, 0))
+        text_rect = text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 - 50))
+        screen.blit(text_surface, text_rect)
+
+        enter_name_txt = self.font.render(">", True, (0, 0, 0))
+        txt_surface = self.font.render(self.player_name, True, (0, 0, 0))
+    
+        input_y_position = text_rect.bottom + 30  # Position below "Press enter to start" text
+        screen.blit(enter_name_txt, (screen.get_width() // 2 - 100, input_y_position))
+        screen.blit(txt_surface, (screen.get_width() // 2 - 80, input_y_position))
+
+        if self.input_active and self.cursor_visible:
+            cursor_x = screen.get_width() // 2 - 80 + txt_surface.get_width()
+            cursor_y = input_y_position
+            cursor_height = txt_surface.get_height()
+            pygame.draw.line(screen, (0, 0, 0), (cursor_x, cursor_y), (cursor_x, cursor_y + cursor_height), 2)
+
+        width = max(400, txt_surface.get_width() + 10)
+        self.input_box.w = width
