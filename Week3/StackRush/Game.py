@@ -2,6 +2,9 @@ import pygame
 from Block import Block
 from Player import Player
 from pathlib import Path
+pygame.mixer.init()
+metronome_sound = pygame.mixer.Sound("./Sound/Metronome.wav")  
+metronome_sound.set_volume(1)
 
 #game class to handle the whole game
 class Game:
@@ -97,6 +100,9 @@ class Game:
             elif event.key == pygame.K_SPACE and self.is_playing:#when space is pressed the block falls and stops 
                 moving_block = self.blocks.sprites()[-1]
                 moving_block.stop()
+                if self.time_since_last_increase % (1 / moving_block.velocity) < 0.1:
+                    if not pygame.mixer.get_busy():  # Only play if no sound is currently playing
+                        metronome_sound.play()
                 if len(self.blocks) > 1:
                     static_block = self.blocks.sprites()[-2]#immediately a new block spawns so the last one is set to static
                     if moving_block.rect.x >= static_block.rect.x + static_block.width or moving_block.rect.x + moving_block.width <= static_block.rect.x:
