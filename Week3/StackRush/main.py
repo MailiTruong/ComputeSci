@@ -4,6 +4,7 @@ from Menu import Menu
 
 pygame.init()
 
+#set game and menu instances and clock
 pygame.display.set_caption("StackRush")
 screen = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
@@ -13,41 +14,30 @@ menu = Menu()
 game.run = True
 dt = 0
 
+#game loop
 while game.run:
 
     screen.fill([255, 255, 255])
 
+    #handle quit
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game.run = False
 
+    #check all events everytime
         if not game.is_playing:
-            menu.event_handler(event)
+            menu.check_event(event)
+        game.check_event(event)
 
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RETURN and not game.is_playing:
-                game.start()  
-            elif event.key == pygame.K_SPACE and game.is_playing:
-                moving_block = game.blocks.sprites()[-1]
-                moving_block.stop()
-                if len(game.blocks) > 1:
-                    static_block = game.blocks.sprites()[-2]
-                    if moving_block.rect.x >= static_block.rect.x + static_block.width or moving_block.rect.x + moving_block.width <= static_block.rect.x:
-                        game.game_over()
-                    else:
-                        overlap_width = moving_block.width - abs(moving_block.rect.x - static_block.rect.x)
-                        moving_block.update_block_width(overlap_width)
-                        moving_block.update_block_rect(static_block)
-                        game.spawn_block()                        
-                        game.blocks.sprites()[-1].update_block_width(overlap_width)
-                        game.score += 1
-
+    #store the name and update the game
     if game.is_playing:
+        game.player.name = menu.player_name
         game.update(dt)
-    else:
+    else:#if it's not playing the menu displays
         menu.update()
-        menu.display(screen) 
+        menu.display(screen)
 
     pygame.display.flip()
     dt = clock.tick(60) / 1000
+
 pygame.quit()
