@@ -1,6 +1,6 @@
 # StackRush
 
-**StackRush** is a vintage pixel game made with `pygame` where you have to stack blocks according to a certain tempo as precisely as possible to achieve high scores and be on the podium !
+**StackRush** is a vintage pixel game made with `pygame` where you have to stack blocks according to the tempo of a metronome that accelerates as precisely as possible to achieve high scores and be on the podium ! (the analysis of the games are in the jupyter notebook)
 
 ## Table of Contents
 1. [Gameplay](#gameplay)

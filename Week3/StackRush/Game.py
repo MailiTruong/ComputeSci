@@ -77,6 +77,7 @@ class Game:
         self.spawn_block()
         self.is_paused = False
         self.player = Player()
+        self.player.load_player()
 
     #game over function to store the data and clears the lists
     def game_over(self):
@@ -109,7 +110,7 @@ class Game:
                         self.game_over()# if the block falls outside of the static block it's game over
                     else:#if it falls on the other block the remaining part in the air needs to go and this part is the same length as the one overlapping 
                         overlap_width = moving_block.width - abs(moving_block.rect.x - static_block.rect.x)
-                        self.player.block_width_difference.append(overlap_width)
+                        self.player.block_width_difference.append(str(overlap_width))
                         moving_block.update_block_width(overlap_width)
                         moving_block.update_block_rect(static_block)
                         self.spawn_block()                        
