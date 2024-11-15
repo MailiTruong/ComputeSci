@@ -23,7 +23,7 @@ class Menu():
             if self.input_active:
                 if event.key == pygame.K_BACKSPACE:
                     self.player_name = self.player_name[:-1]
-                elif event.unicode.isalnum():
+                elif event.key != pygame.K_SPACE and event.unicode.isalnum():
                     self.player_name += event.unicode 
 
     #handle cursor

@@ -1,7 +1,9 @@
 import pygame
+import serial
 from Block import Block
 from Player import Player
 from pathlib import Path
+
 pygame.mixer.init()
 metronome_sound = pygame.mixer.Sound("./Sound/Metronome.wav")  
 metronome_sound.set_volume(1)
@@ -117,7 +119,6 @@ class Game:
                         self.blocks.sprites()[-1].update_block_width(overlap_width)
                         self.score += 1
 
-
     def update(self, dt):
         if self.is_paused:
             self.display_leaderboard()
@@ -143,6 +144,7 @@ class Game:
     
     #adds all the players to the list of players
     def load_players(self):
+        self.players = []
         for file in Path("./Players").iterdir(): 
             if file.is_file():
                 if file.suffix == ".csv":

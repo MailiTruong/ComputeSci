@@ -1,4 +1,5 @@
 import pygame
+import serial
 from Game import Game
 from Menu import Menu
 
@@ -9,15 +10,25 @@ pygame.display.set_caption("StackRush")
 screen = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
 
+#set serial connexion
+ser = serial.Serial('/dev/tty.usbserial-1340', 9600)
+
 game = Game()
 menu = Menu()
 game.run = True
 dt = 0
+button_pressed = False
 
 #game loop
 while game.run:
 
     screen.fill([255, 255, 255])
+
+    if ser and ser.in_waiting > 0:
+        data = ser.readline().decode('utf-8').strip()  
+        if data == "BUTTON_PRESSED":
+            event = pygame.event.Event(pygame.KEYDOWN, key = pygame.K_SPACE)
+            pygame.event.post(event)
 
     #handle quit
     for event in pygame.event.get():
@@ -36,8 +47,9 @@ while game.run:
     else:#if it's not playing the menu displays
         menu.update()
         menu.display(screen)
-
+    
     pygame.display.flip()
     dt = clock.tick(60) / 1000
 
+ser.close()
 pygame.quit()

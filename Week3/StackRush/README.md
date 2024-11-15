@@ -30,6 +30,8 @@
 5. **Leaderboard**:
    - After game over, your high score is stored in a CSV file, and a leaderboard of the top 10 scores is displayed.
 
+![gameplay](./videos/demo_gif.)
+
 ## Game Components
 
 Only two buttons.
