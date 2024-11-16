@@ -18,12 +18,11 @@ class Player:
             with open(f'./Players/{self.name}.csv', 'a', newline='') as player_file:
                 csv_writer = csv.writer(player_file)
                 csv_writer.writerow(self.header)
-        else: 
-            with open(f'./Players/{self.name}.csv', 'a', newline = '') as player_file:
-                csv_writer = csv.writer(player_file)
-                player_data = [self.score, self.highscore, ', '.join(self.block_width_difference)]
+        with open(f'./Players/{self.name}.csv', 'a', newline = '') as player_file:
+            csv_writer = csv.writer(player_file)
+            player_data = [self.score, self.highscore, ', '.join(self.block_width_difference)]
 
-                csv_writer.writerow(player_data)
+            csv_writer.writerow(player_data)
         
     #modify highscore if the player has a better score
     def update_highscore(self):
@@ -35,8 +34,7 @@ class Player:
         if os.path.exists(f'./Players/{self.name}.csv'):
             with open(f'./Players/{self.name}.csv', 'r', newline='') as player_file:
                 csv_reader = list(csv.reader(player_file))
-                if len(csv_reader) > 1:
-                    self.highscore = max(self.highscore, int(csv_reader[-1][1]))
-        
-            
+                for row in csv_reader[1:]:  # Skip header row
+                    if row:
+                        self.highscore = int(row[1])
 

@@ -1,10 +1,10 @@
 # StackRush
 
-**StackRush** is a vintage pixel game made with `pygame` where you have to stack blocks according to the tempo of a metronome that accelerates as precisely as possible to achieve high scores and be on the podium ! (the analysis of the games are in the jupyter notebook)
+**StackRush** is a vintage pixel game made with `pygame` where you have to stack blocks according to the tempo of a metronome that accelerates as precisely as possible to achieve high scores and be on the podium ! You can either play it with a small controller or on you keyboard ! (the analysis of the games are in the jupyter notebook)
 
 ## Table of Contents
 1. [Gameplay](#gameplay)
-2. [Game Components](#game-components)
+2. [Controller](#controller)
 3. [File Structure](#classes)
 4. [Installation and Setup](#installation-and-setup)
 
@@ -27,16 +27,17 @@
 4. **Game Over**:
    - The game ends when a block falls completely outside the last placed block. Your score is then saved and if it surpasses your previous high score your high score will be updated.
 
-5. **Leaderboard**:
-   - After game over, your high score is stored in a CSV file, and a leaderboard of the top 10 scores is displayed.
+5. **Leaderboard and Pause**:
+   - After game over, your high score is stored in a CSV file, so a leaderboard of the top 10 players is displayed if you press **P** to pause the game and **P** again to get out of the pause menu.
 
-### Here's a demo but for the moment I don't have enough players to display the top 10
+### Here's a demo and if you want I also have the demo with the controller in the video file but for this one I didn't have enough players yet to display the top 10
 
 ![gameplay](./videos/demo_gif.gif)
 
-## Game Components
+## Controller
 
-Only two buttons.
+If you want to use a controller you have the script for the only button required and you will need an Arduino or compatible microcontroller.
+Make sure your COM port is correctly set in the Python script.
 
 ## Classes
 

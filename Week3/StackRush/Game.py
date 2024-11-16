@@ -55,6 +55,26 @@ class Game:
 
         self.blocks.add(block)
 
+    def handle_block_stop(self):
+        moving_block = self.blocks.sprites()[-1]
+        moving_block.stop()
+        if self.time_since_last_increase % (1 / moving_block.velocity) < 0.1:
+            if not pygame.mixer.get_busy():
+                metronome_sound.play() 
+
+        if len(self.blocks) > 1:
+            static_block = self.blocks.sprites()[-2]
+            if moving_block.rect.x >= static_block.rect.x + static_block.width or moving_block.rect.x + moving_block.width <= static_block.rect.x:
+                self.game_over()
+            else:
+                overlap_width = moving_block.width - abs(moving_block.rect.x - static_block.rect.x)
+                self.player.block_width_difference.append(str(overlap_width))
+                moving_block.update_block_width(overlap_width)
+                moving_block.update_block_rect(static_block)
+                self.spawn_block()
+                self.blocks.sprites()[-1].update_block_width(overlap_width)
+                self.score += 1
+
     #function to create and display the leaderboard
     def display_leaderboard(self):
         font = pygame.font.SysFont("monospace", 16)
@@ -73,12 +93,11 @@ class Game:
         self.is_paused = not self.is_paused
 
     #start function that resets everything
-    def start(self):
-        self.is_playing = True
+    def start(self, menu_player_name):
         self.spawn_block()
         self.spawn_block()
-        self.is_paused = False
-        self.player = Player()
+        self.player = Player()  # Create a new Player instance
+        self.player.name = menu_player_name
         self.player.load_player()
 
     #game over function to store the data and clears the lists
@@ -86,38 +105,25 @@ class Game:
         self.player.score = self.score
         self.player.update_highscore()
         self.player.load_csv()
-        if self.player not in self.players:
-            self.players.append(self.player)
         self.score = 0
         self.is_playing = False
         self.blocks = pygame.sprite.Group()
-        self.players = []
     
     #handle inputs for the game this time not the menu
-    def check_event(self, event):
+    def check_event(self, event, menu_player_name):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_p and self.is_playing:
                 self.pause()
-            if event.key == pygame.K_SPACE and not self.is_playing:
-                self.start()
-            elif event.key == pygame.K_SPACE and self.is_playing:#when space is pressed the block falls and stops 
-                moving_block = self.blocks.sprites()[-1]
-                moving_block.stop()
-                if self.time_since_last_increase % (1 / moving_block.velocity) < 0.1:
-                    if not pygame.mixer.get_busy():  # Only play if no sound is currently playing
-                        metronome_sound.play()
-                if len(self.blocks) > 1:
-                    static_block = self.blocks.sprites()[-2]#immediately a new block spawns so the last one is set to static
-                    if moving_block.rect.x >= static_block.rect.x + static_block.width or moving_block.rect.x + moving_block.width <= static_block.rect.x:
-                        self.game_over()# if the block falls outside of the static block it's game over
-                    else:#if it falls on the other block the remaining part in the air needs to go and this part is the same length as the one overlapping 
-                        overlap_width = moving_block.width - abs(moving_block.rect.x - static_block.rect.x)
-                        self.player.block_width_difference.append(str(overlap_width))
-                        moving_block.update_block_width(overlap_width)
-                        moving_block.update_block_rect(static_block)
-                        self.spawn_block()                        
-                        self.blocks.sprites()[-1].update_block_width(overlap_width)
-                        self.score += 1
+            
+            if event.key == pygame.K_SPACE:
+                if not self.is_playing:
+                    self.is_paused = False
+                    self.is_playing = True
+                    self.start(menu_player_name)
+                else:
+                    # Handling space press while playing
+                    self.handle_block_stop()
+
 
     def update(self, dt):
         if self.is_paused:
