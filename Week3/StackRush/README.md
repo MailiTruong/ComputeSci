@@ -47,7 +47,7 @@ Make sure your COM port is correctly set in the Python script.
 - **Block**: Represents each stackable block, controls movement, and handles overlap calculations.
 
 ## Data
-The game maintains a `Players` folder, where each player's data is stored in a separate `.csv` file. This setup allows the game to display a leaderboard based on these scores and to make the jupyter notebook the interpret this data.
+The game maintains a `Players` folder, where each player's data is stored in a separate `.csv` file. This setup allows the game to display a leaderboard based on these scores and to make the jupyter notebook the interpret this data. Concerning the Jupyter notebook it is interactive, you can choose the players to plot but in order to do that you must clone the repository or else you will not be able to choose and only have the default plots.
 
 ## Installation and Setup
 
