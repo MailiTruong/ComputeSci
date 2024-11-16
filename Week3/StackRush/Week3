@@ -1,7 +1,0 @@
-.venv
-__pycache__
-managed_components
-build
-.DS_Store
-.cache
-pyrightconfig.json
